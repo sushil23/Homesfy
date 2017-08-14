@@ -1,0 +1,23 @@
+{
+  "name": "homesfy_assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "node server/server"
+  },
+  "author": "Sushil",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.5",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0"
+  }
+}
