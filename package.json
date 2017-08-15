@@ -13,7 +13,9 @@
   "dependencies": {
     "angular": "^1.6.5",
     "express": "^4.15.4",
-    "mongodb": "^2.2.31"
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.7",
+    "webpack": "^3.5.4"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
