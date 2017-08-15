@@ -6,15 +6,21 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "node server/server"
+    "start": "node server/server",
+    "dev": "nodemon server/server"
   },
   "author": "Sushil",
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.5",
     "express": "^4.15.4",
+    "express-graphql": "^0.6.7",
+    "graphql": "^0.10.5",
+    "graphql-date": "^1.0.3",
+    "lodash": "^4.17.4",
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.7",
+    "nodemon": "^1.11.0",
     "webpack": "^3.5.4"
   },
   "devDependencies": {
