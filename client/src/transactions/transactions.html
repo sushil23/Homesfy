@@ -1,0 +1,28 @@
+<div>
+    <table class="table table-hover table-bordered">
+        <thead class="thead-default">
+            <tr>
+                <th>#</th>
+                <th>User name</th>
+                <th>Book title</th>
+                <th>Due date</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="transaction in transactions.transactions track by transaction._id">
+                <th scope="row">{{$index+1}}</th>
+                <td>{{transaction.user.name}}</td>
+                <td>{{transaction.book.name}}</td>
+                <td>
+                    <span ng-show="transaction.dueDate">{{transaction.dueDate | date}}</span>
+                    <span ng-show="!transaction.dueDate">-</span>
+                </td>
+                <td>
+                    <span class="badge badge-primary" ng-show="transaction.isBorrow">Lent</span>
+                    <span class="badge badge-secondary" ng-show="!transaction.isBorrow">Returned</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

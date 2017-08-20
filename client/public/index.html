@@ -2,14 +2,36 @@
 <html ng-app="libraryApp" ng-controller="MainController as mainController">
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <base href="/">
         <title>My Library</title>
         <script src="bundle.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>
 
     <body>
-        <div>
-            {{mainController.msg}}
+        <div class="container">
+            <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary">
+                <a class="navbar-brand" href="#">Library System</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item" ng-class="{'active': mainController.$location.path()==='/books'}">
+                            <a class="nav-link" href="/books">Books</a>
+                        </li>
+                        <li class="nav-item" ng-class="{'active': mainController.$location.path()==='/users'}">
+                            <a class="nav-link" href="/users">Users</a>
+                        </li>
+                        <li class="nav-item" ng-class="{'active': mainController.$location.path()==='/transactions'}">
+                            <a class="nav-link" href="/transactions">Transactions</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-        <!-- <div ng-view></div> -->
+        <div class="view-container" ng-view></div>
     </body>
 </html>

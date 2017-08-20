@@ -1,0 +1,89 @@
+<div>
+    <table class="table table-hover table-bordered">
+        <thead class="thead-default">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="book in books.books track by book._id">
+                <th scope="row">{{$index+1}}</th>
+                <td>{{book.name}}</td>
+                <td>{{book.author}}</td>
+                <td>
+                    <span class="badge badge-primary" ng-show="book.isAvailable">Available</span>
+                    <span class="badge badge-secondary" ng-show="!book.isAvailable">Not Available</span>
+                </td>
+                <td>
+                    <button type="button" ng-show="book.isAvailable" class="btn btn-outline-primary" ng-click="books.initTransaction('lend', book._id)">Lend</button>
+                    <button type="button" ng-show="!book.isAvailable" class="btn btn-outline-success" ng-click="books.initTransaction('receive', book._id)">Receive</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary float-right mr-3" ng-click="books.openModal()">Add Book</button>
+</div>
+
+<div class="modal add-book fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="bookName">Book Title</label>
+                    <input type="text" ng-model="books.title" class="form-control" id="bookName" aria-describedby="emailHelp" placeholder="Enter title">
+                </div>
+                <div class="form-group">
+                    <label for="bookAuthor">Book Author</label>
+                    <input type="text" ng-model="books.author" class="form-control" id="bookAuthor" aria-describedby="emailHelp" placeholder="Enter author">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="books.add()" ng-disabled="!books.title || !books.author">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal find-user fade" id="findUser" tabindex="-1" role="dialog" aria-labelledby="findUserTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="findUserTitle">Find User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="bookName">Enter Contact No.</label>
+                    <div class="input-group">
+                        <input type="text" ng-model="books.userContactNo" class="form-control" id="bookName" aria-describedby="emailHelp" placeholder="Enter contact no.">
+                        <span class="input-group-addon" ng-click="books.findUser()">Find</span>
+                    </div>
+                </div>
+
+                <div ng-show="books.selectedUserName">
+                    Entered user is {{books.selectedUserName}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="books.createTransaction()" ng-disabled="!books.selectedUserName">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>

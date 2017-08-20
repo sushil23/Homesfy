@@ -1,6 +1,6 @@
 export default class MainController {
-    constructor() {
-        this.msg = "It worked";
-        console.log('hi');
+    constructor($location) {
+        this.$location = $location;
     }
 }
+MainController.$inject = ['$location'];

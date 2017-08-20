@@ -100,6 +100,17 @@ const RootQuery = new GraphQLObjectType({
                 });
             }
         },
+        userByContactNo: {
+            type: UserType,
+            args: {contactNo: {type: new GraphQLNonNull(GraphQLString)}},
+            resolve(parentValue, args) {
+                return User.findOne({contactNumber: args.contactNo}).then((doc) => {
+                    return doc;
+                }, (err) => {
+                    console.log(err);
+                });
+            }
+        },
         users: {
             type: new GraphQLList(UserType),
             resolve() {
@@ -225,6 +236,30 @@ const mutation = new GraphQLObjectType({
                     return book;
                 }, (err) => {
                     console.log(err);
+                });
+            }
+        },
+        createTransaction: {
+            type: TransactionType,
+            args: {
+                transType: {type: new GraphQLNonNull(GraphQLString)},
+                bookId: {type: new GraphQLNonNull(GraphQLString)},
+                selectedUserId: {type: new GraphQLNonNull(GraphQLString)}
+            },
+            resolve(parentValue, args) {
+                var body = {
+                    isAvailable: args.transType === 'lend' ? false : true
+                };
+                return Book.findByIdAndUpdate(args.bookId, {$set: body}, {new: true}).then((res) => {
+                    var transaction = new Transaction({
+                        userId: args.selectedUserId,
+                        bookId: args.bookId,
+                        dueDate: new Date(new Date().getTime() + 15*24*60*60*1000),
+                        isBorrow: args.transType === 'lend' ? true : false
+                    });
+                    return transaction.save();
+                }).then((res) => {
+                    return res;
                 });
             }
         }
